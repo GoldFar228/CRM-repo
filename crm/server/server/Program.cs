@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using server;
 using server.Infrastructure;
 using server.Services;
@@ -21,6 +22,15 @@ var muxer = ConnectionMultiplexer.Connect(new ConfigurationOptions
     User = reddisConfig.User,
     Password = reddisConfig.Password
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowUmiDevServer",
+        policy => policy
+            .WithOrigins("http://localhost:8000") // Разрешить UmiJS-сервер
+            .AllowAnyMethod()                     // Разрешить GET, POST и т.д.
+            .AllowAnyHeader()                     // Разрешить любые заголовки
+            .AllowCredentials());                 // Разрешить куки/авторизацию
+});
 builder.Services.AddSingleton<IConnectionMultiplexer>(muxer);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -35,6 +45,8 @@ builder.Services.AddTransient<NoteService>();
 builder.Services.AddTransient<CacheService>();
 
 var app = builder.Build();
+
+app.UseCors("AllowUmiDevServer");// Включить CORS-политику
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
