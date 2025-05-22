@@ -48,7 +48,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 39
+        "register": 41
       },
       "enableBy": "register",
       "type": "preset",
@@ -61,7 +61,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 14
+        "register": 16
       },
       "enableBy": "register",
       "type": "preset",
@@ -126,10 +126,10 @@
       "time": {
         "hooks": {
           "modifyAppData": [
-            57
+            33
           ]
         },
-        "register": 44
+        "register": 34
       },
       "enableBy": "register",
       "type": "plugin",
@@ -159,7 +159,7 @@
             0
           ],
           "onCheck": [
-            0
+            1
           ]
         },
         "register": 2
@@ -192,7 +192,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -209,7 +209,7 @@
             0
           ]
         },
-        "register": 17
+        "register": 15
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1064,7 +1064,7 @@
       "time": {
         "hooks": {
           "onStart": [
-            0
+            1
           ]
         },
         "register": 2
@@ -1093,7 +1093,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 121
+        "register": 107
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1106,7 +1106,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 207
+        "register": 196
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1119,7 +1119,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 30
+        "register": 29
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1133,7 +1133,7 @@
       "time": {
         "hooks": {
           "modifyAppData": [
-            0
+            1
           ]
         },
         "register": 1
@@ -1149,7 +1149,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1179,7 +1179,7 @@
             2
           ]
         },
-        "register": 52
+        "register": 55
       },
       "type": "plugin",
       "path": "C:/Users/Lenovo/Desktop/DoNotTouch/БД/4/CRM-repo/crm/clientUmi1/crmCLient/node_modules/@umijs/preset-umi/dist/features/mock/mock.js",
@@ -1191,7 +1191,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 3
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1246,7 +1246,7 @@
             1
           ]
         },
-        "register": 4
+        "register": 3
       },
       "type": "plugin",
       "path": "C:/Users/Lenovo/Desktop/DoNotTouch/БД/4/CRM-repo/crm/clientUmi1/crmCLient/node_modules/@umijs/preset-umi/dist/features/polyfill/polyfill.js",
@@ -1284,7 +1284,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 2
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1297,7 +1297,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1310,7 +1310,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 8
+        "register": 11
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1348,7 +1348,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 5
+        "register": 7
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1361,7 +1361,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 5
+        "register": 7
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1374,7 +1374,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 6
+        "register": 7
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1387,7 +1387,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 4
+        "register": 6
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1425,7 +1425,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 32
+        "register": 31
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1450,7 +1450,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1463,7 +1463,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 2
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1476,7 +1476,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1518,7 +1518,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 6
+        "register": 7
       },
       "type": "plugin",
       "path": "C:/Users/Lenovo/Desktop/DoNotTouch/БД/4/CRM-repo/crm/clientUmi1/crmCLient/node_modules/@umijs/preset-umi/dist/features/ui/ui.js",
@@ -1530,7 +1530,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1543,7 +1543,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 5
+        "register": 4
       },
       "type": "plugin",
       "path": "C:/Users/Lenovo/Desktop/DoNotTouch/БД/4/CRM-repo/crm/clientUmi1/crmCLient/node_modules/@umijs/preset-umi/dist/features/hmrGuardian/hmrGuardian.js",
@@ -1555,7 +1555,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 4
       },
       "type": "plugin",
       "path": "C:/Users/Lenovo/Desktop/DoNotTouch/БД/4/CRM-repo/crm/clientUmi1/crmCLient/node_modules/@umijs/preset-umi/dist/features/routePreloadOnLoad/routePreloadOnLoad.js",
@@ -1567,7 +1567,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 2
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1580,7 +1580,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 21
+        "register": 23
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1593,7 +1593,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 59
+        "register": 55
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1607,13 +1607,13 @@
       "time": {
         "hooks": {
           "modifyAppData": [
-            34
+            23
           ],
           "onStart": [
             0
           ]
         },
-        "register": 71
+        "register": 68
       },
       "type": "plugin",
       "path": "C:/Users/Lenovo/Desktop/DoNotTouch/БД/4/CRM-repo/crm/clientUmi1/crmCLient/node_modules/@umijs/preset-umi/dist/commands/dev/dev.js",
@@ -1638,7 +1638,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1651,7 +1651,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1703,7 +1703,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1716,7 +1716,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 5
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1729,7 +1729,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 4
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1846,7 +1846,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1859,7 +1859,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 35
+        "register": 30
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1885,7 +1885,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 4
+        "register": 5
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1932,7 +1932,7 @@
             0
           ]
         },
-        "register": 9
+        "register": 8
       },
       "type": "plugin",
       "path": "C:/Users/Lenovo/Desktop/DoNotTouch/БД/4/CRM-repo/crm/clientUmi1/crmCLient/node_modules/@umijs/plugins/dist/antd.js",
@@ -1944,7 +1944,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 12
+        "register": 11
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1976,13 +1976,13 @@
             0
           ],
           "addLayouts": [
-            1
+            0
           ],
           "modifyAppData": [
             1
           ]
         },
-        "register": 5
+        "register": 4
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2008,7 +2008,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 6
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2021,7 +2021,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2034,7 +2034,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2097,7 +2097,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2123,7 +2123,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 0
       },
       "enableBy": "config",
       "type": "plugin",
@@ -2187,7 +2187,7 @@
             0
           ]
         },
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -2243,9 +2243,14 @@
         "redirect": "/home"
       },
       {
-        "name": "首页",
+        "name": "kawasagi",
         "path": "/home",
         "component": "./Home"
+      },
+      {
+        "name": "kawa1sagi",
+        "path": "/auth",
+        "component": "./Authorization"
       }
     ],
     "npmClient": "npm"
@@ -2307,9 +2312,14 @@
         "redirect": "/home"
       },
       {
-        "name": "首页",
+        "name": "kawasagi",
         "path": "/home",
         "component": "./Home"
+      },
+      {
+        "name": "kawa1sagi",
+        "path": "/auth",
+        "component": "./Authorization"
       }
     ],
     "npmClient": "npm",
@@ -3239,15 +3249,26 @@
       "absPath": "/"
     },
     "2": {
-      "name": "首页",
+      "name": "kawasagi",
       "path": "/home",
       "file": "@/pages/Home/index.tsx",
       "parentId": "ant-design-pro-layout",
       "id": "2",
       "absPath": "/home",
-      "__content": "import Guide from '@/components/Guide';\nimport { trim } from '@/utils/format';\nimport { PageContainer } from '@ant-design/pro-components';\nimport { request, useModel } from '@umijs/max';\nimport styles from './index.less';\nimport { useState } from 'react';\n\nconst HomePage: React.FC = () => {\n  const { name } = useModel('global');\n\n  const [data, setData] = useState<Array<{ id: number, name: string, phone: string, email: string, createdAt: Date, createdById: number }>>();\n\n  const clickButton = () => {\n    request(\"/api/Client/GetClients\",\n      { method: 'GET' }\n    )\n      .then((response) => {\n        console.log(response);\n        setData(response)\n      })\n  }\n\n\n  return (\n    <PageContainer ghost>\n      <div>\n        <input type=\"button\" onClick={clickButton} />\n      </div>\n      <div className='container'>\n        {data?.map((d) => d.name + \"\\n\" + d.phone)+ \"\\n\"}\n      </div>\n    </PageContainer>\n  );\n};\n\nexport default HomePage;\n",
+      "__content": "import Guide from '@/components/Guide';\nimport { trim } from '@/utils/format';\nimport { PageContainer } from '@ant-design/pro-components';\nimport { request, useModel } from '@umijs/max';\nimport styles from './index.less';\nimport { useState } from 'react';\n\nconst HomePage: React.FC = () => {\n  const { name } = useModel('global');\n\n  const [data, setData] = useState<Array<{ id: number, name: string, phone: string, email: string, createdAt: Date, createdById: number }>>();\n\n  const clickButton = () => {\n    request(\"/api/Client/GetClients\",\n      { method: 'GET' }\n    )\n      .then((response) => {\n        console.log(response);\n        setData(response)\n      })\n  }\n\n\n  return (\n    <PageContainer ghost>\n      <div className={styles.container}>\n        <input type=\"button\" onClick={clickButton} />\n      </div>\n      <div className='container'>\n        {data?.map((d) => d.name + \"\\n\" + d.phone)+ \"\\n\"}\n      </div>\n    </PageContainer>\n  );\n};\n\nexport default HomePage;\n",
       "__isJSFile": true,
       "__absFile": "C:/Users/Lenovo/Desktop/DoNotTouch/БД/4/CRM-repo/crm/clientUmi1/crmCLient/src/pages/Home/index.tsx"
+    },
+    "3": {
+      "name": "kawa1sagi",
+      "path": "/auth",
+      "file": "@/pages/Authorization/index.tsx",
+      "parentId": "ant-design-pro-layout",
+      "id": "3",
+      "absPath": "/auth",
+      "__content": "import HeaderComponent from \"@/components/Header\"\r\nimport { PageContainer } from \"@ant-design/pro-components\"\r\n\r\nconst AuthPage: React.FC = () => {\r\n\r\n\r\n    return (\r\n        <PageContainer ghost>\r\n            <div>\r\n                <HeaderComponent />\r\n            </div>\r\n        </PageContainer>\r\n    )\r\n}\r\n\r\nexport default AuthPage",
+      "__isJSFile": true,
+      "__absFile": "C:/Users/Lenovo/Desktop/DoNotTouch/БД/4/CRM-repo/crm/clientUmi1/crmCLient/src/pages/Authorization/index.tsx"
     },
     "ant-design-pro-layout": {
       "id": "ant-design-pro-layout",
@@ -3293,7 +3314,9 @@
   "globalJS": [],
   "overridesCSS": [],
   "bundler": "webpack",
-  "git": {},
+  "git": {
+    "originUrl": "https://github.com/GoldFar228/CRM-repo.git"
+  },
   "framework": "react",
   "typescript": {
     "tsVersion": "5.8.3",

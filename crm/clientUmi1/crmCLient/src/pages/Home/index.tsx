@@ -23,7 +23,7 @@ const HomePage: React.FC = () => {
 
   return (
     <PageContainer ghost>
-      <div>
+      <div className={styles.container}>
         <input type="button" onClick={clickButton} />
       </div>
       <div className='container'>

@@ -26,10 +26,16 @@ export default defineConfig({
       redirect: '/home',
     },
     {
-      name: '首页',
+      name: 'kawasagi',
       path: '/home',
       component: './Home',
     },
+    {
+      
+      name: 'kawa1sagi',
+      path: '/auth',
+      component: './Authorization',
+    }
   ],
   npmClient: 'npm',
 });
