@@ -1,4 +1,5 @@
 using DotNetOpenAuth.OpenId.Extensions.UI;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using server.Models;
@@ -31,6 +32,14 @@ namespace server.Controllers
         {
             var client = await _service.GetClientByIdCachedAsync(id);
             return Ok(client);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> CreateClient([FromBody] Client client)
+        {
+            var newClient = await _service.CreateClientAsync(client);
+            return Ok(newClient);
         }
     }
 }

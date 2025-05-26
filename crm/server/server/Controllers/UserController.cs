@@ -1,8 +1,10 @@
 using DotNetOpenAuth.OpenId.Extensions.UI;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using server.Models;
 using server.Services;
+using System.Security.Claims;
 
 namespace server.Controllers
 {
@@ -26,11 +28,21 @@ namespace server.Controllers
             return Ok(users);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetUserById([FromQuery] int id)
         {
             var user = await _service.GetUserByIdCachedAsync(id);
             return Ok(user);
         }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetRole()
+        {
+            //когда пишем new { } - создаем анонимный объект, внутри него могут быть любые свойства
+            return Ok(new { Role = User.FindFirst(ClaimTypes.Role).Value });
+        }
+
     }
 }

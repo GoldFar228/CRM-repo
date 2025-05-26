@@ -4,13 +4,14 @@
 import React from 'react';
 
 export async function getRoutes() {
-  const routes = {"1":{"path":"/","redirect":"/home","parentId":"ant-design-pro-layout","id":"1"},"2":{"name":"kawasagi","path":"/home","parentId":"ant-design-pro-layout","id":"2"},"3":{"name":"kawa1sagi","path":"/auth","parentId":"ant-design-pro-layout","id":"3"},"ant-design-pro-layout":{"id":"ant-design-pro-layout","path":"/","isLayout":true}} as const;
+  const routes = {"1":{"path":"/","redirect":"/home","parentId":"ant-design-pro-layout","id":"1"},"2":{"name":"home","path":"/home","access":"isUser","parentId":"ant-design-pro-layout","id":"2"},"3":{"name":"clients","path":"/clients","access":"isUser","parentId":"ant-design-pro-layout","id":"3"},"4":{"name":"login","path":"/login","layout":false,"id":"4"},"ant-design-pro-layout":{"id":"ant-design-pro-layout","path":"/","isLayout":true}} as const;
   return {
     routes,
     routeComponents: {
 '1': React.lazy(() => import('./EmptyRoute')),
 '2': React.lazy(() => import(/* webpackChunkName: "p__Home__index" */'@/pages/Home/index.tsx')),
-'3': React.lazy(() => import(/* webpackChunkName: "p__Authorization__index" */'@/pages/Authorization/index.tsx')),
+'3': React.lazy(() => import(/* webpackChunkName: "p__Clients__index" */'@/pages/Clients/index.tsx')),
+'4': React.lazy(() => import(/* webpackChunkName: "p__Authentication__index" */'@/pages/Authentication/index.tsx')),
 'ant-design-pro-layout': React.lazy(() => import(/* webpackChunkName: "umi__plugin-layout__Layout" */'C:/Users/Lenovo/Desktop/DoNotTouch/БД/4/CRM-repo/crm/clientUmi1/crmCLient/src/.umi/plugin-layout/Layout.tsx')),
 },
   };

@@ -10,8 +10,9 @@ export default defineConfig({
   },
   proxy: {
     '/api': {
-      target: 'http://localhost:5218', // Адрес целевого сервера
+      target: 'https://localhost:7079', // Адрес целевого сервера
       changeOrigin: true, // Меняет заголовок Origin на target (обязательно для бэкендов с проверкой CORS)
+      secure: false,
       pathRewrite: { '^/api': '' },
     }
   },
@@ -26,15 +27,22 @@ export default defineConfig({
       redirect: '/home',
     },
     {
-      name: 'kawasagi',
+      name: 'home',
       path: '/home',
       component: './Home',
+      access: 'isUser'
     },
     {
-      
-      name: 'kawa1sagi',
-      path: '/auth',
-      component: './Authorization',
+      name: 'clients',
+      path: '/clients',
+      component: './Clients',
+      access: 'isUser'
+    },
+    {
+      name: 'login',
+      path: '/login',
+      component: './Authentication',
+      layout: false
     }
   ],
   npmClient: 'npm',

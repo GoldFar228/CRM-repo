@@ -1,7 +1,9 @@
 ﻿using DotNetOpenAuth.OpenId.Extensions.UI;
+using DotNetOpenAuth.OpenId.Provider;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using server.Models;
+using server.Models.Enums;
 using StackExchange.Redis;
 
 namespace server.Services
@@ -19,6 +21,7 @@ namespace server.Services
         public async Task<List<Client>> GetClientsAsync()
         {
             var query = _context.Clients
+                .Include(c => c.CreatedBy)
                 .AsQueryable();
 
             var response = await query.OrderBy(x => x.Id).ToListAsync();
@@ -36,5 +39,27 @@ namespace server.Services
         {
             return await GetCachedAsync(new ReddisKey(id, Table), GetClientByIdAsync);
         }
+
+        public async Task<AuthResponse?> CreateClientAsync(Client request)
+        {
+            var exists = await _context.Clients
+                .AnyAsync(c => c.Email == request.Email);
+
+            if (exists) return new AuthResponse("Client exists");
+
+            var client = new Client
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Phone = request.Phone,
+                CreatedAt = request.CreatedAt,
+            };
+
+            await _context.Clients.AddAsync(client);
+            await _context.SaveChangesAsync();
+            return new AuthResponse("Client created");
+        }
+
+        public record class AuthResponse(string? Message = null);
     }
 }
