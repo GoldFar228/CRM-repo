@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table } from 'antd';
+import { Button, Modal, Table } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import { request, useModel } from '@umijs/max';
 import { Client } from 'typings';
@@ -46,7 +46,7 @@ const columns: TableColumnsType<Client> = [
     dataIndex: 'phone',
     render: (phone: string) => {
       if (!phone) return '-';
-      
+
       const match = phone.match(/^(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})$/);
 
       if (match)
@@ -60,13 +60,11 @@ const onChange: TableProps<Client>['onChange'] = (pagination, filters, sorter, e
   console.log('params', pagination, filters, sorter, extra);
 };
 
-const onCreateClick = () => {
-  return(<ClientForm/>)
-};
 
 const Clients: React.FC = () => {
 
   const [clients, setClients] = useState();
+  const [modalOpen, setmodalOpen] = useState(false);
 
   useEffect(() => {
     const onGetClients = async () => {
@@ -87,8 +85,16 @@ const Clients: React.FC = () => {
         onChange={onChange}
         showSorterTooltip={{ target: 'sorter-icon' }}
       />
-      <ClientForm/>
-      <Button type="primary" htmlType="submit" onClick={onCreateClick}>Зарегестрировать клиента</Button>
+      <Button type="primary" htmlType="submit" onClick= {() => setmodalOpen(true)}>Зарегестрировать клиента</Button>
+      <Modal
+        title="Зарегестрируйте клиента"
+        centered
+        open={modalOpen}
+        onOk={() => setmodalOpen(false)}
+        onCancel={() => setmodalOpen(false)}
+      >
+        <ClientForm />
+      </Modal>
     </>
   )
 };

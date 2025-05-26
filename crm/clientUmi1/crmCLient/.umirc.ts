@@ -39,6 +39,12 @@ export default defineConfig({
       access: 'isUser'
     },
     {
+      name: 'deals',
+      path: '/deals',
+      component: './Deals',
+      access: 'isUser'
+    },
+    {
       name: 'login',
       path: '/login',
       component: './Authentication',

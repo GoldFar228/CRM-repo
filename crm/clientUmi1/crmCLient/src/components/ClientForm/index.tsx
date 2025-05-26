@@ -7,27 +7,27 @@ import { Client } from "typings";
 const ClientForm: React.FC = () => {
     const [form] = Form.useForm();
 
-    const onCreateClient = () => {
-        console.log(11)
+    const onCreateClient = async (data: Client) => {
+        const res = request("api/Client/CreateClient", {
+            method: "POST",
+            data
+        })
     };
-
+    
     const onFinish: FormProps<Client>['onFinish'] = async (data) => {
-        await onCreateClient();
+        await onCreateClient(data);
+        form.resetFields();
     };
 
     const onFinishFailed: FormProps<Client>['onFinishFailed'] = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
-    // const onRegisterClicked = () => {
-    //     setIsReg(prev => !prev);
-    // };
-
     return (
         <Form
             form={form}
             name="client-form"
-            labelCol={{ span: 8 }}
+            labelCol={{ span: 4 }}
             wrapperCol={{ span: 16 }}
             style={{ maxWidth: 600 }}
             initialValues={{ remember: true }}
@@ -43,10 +43,8 @@ const ClientForm: React.FC = () => {
                 <Input />
             </Form.Item>
 
-
-
             <Form.Item
-                label="Name"
+                label="Имя"
                 name="name"
                 rules={[{ required: true, message: 'Please input your name!' }]}
             >
@@ -54,24 +52,15 @@ const ClientForm: React.FC = () => {
             </Form.Item>
 
             <Form.Item
-                label="Phone"
+                label="Телефон"
                 name="phone"
                 rules={[{ required: true, message: 'Please input your phone!' }]}
             >
                 <Input />
             </Form.Item>
 
-            <Form.Item
-                label="DatePicker"
-                name="DatePicker"
-                rules={[{ required: true, message: 'Please input!' }]}
-            >
-                <DatePicker />
-            </Form.Item>
-
-
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="link" htmlType="submit">
+                <Button type="primary" htmlType="submit">
                     Создать клиента
                 </Button>
             </Form.Item>

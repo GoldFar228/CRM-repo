@@ -16,6 +16,10 @@ namespace server.Models
 
         [ForeignKey(nameof(CreatedById))]
         public User? CreatedBy { get; set; }
+        public int AssignedToId { get; set; }
+
+        [ForeignKey(nameof(AssignedToId))]
+        public Client AssignedTo { get; set; }
 
         public DealStatusEnum Status { get; set; }
 

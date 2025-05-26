@@ -1,4 +1,5 @@
 ﻿using DotNetOpenAuth.OpenId.Extensions.UI;
+using DotNetOpenAuth.OpenId.Provider;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -25,6 +26,7 @@ namespace server.Services
         {
             var query = _context.Deals
                 .Include(d => d.CreatedBy)
+                .Include(d => d.AssignedTo)
                 .AsQueryable();
 
             var response = await query.OrderBy(x => x.Id).ToListAsync();
@@ -35,7 +37,18 @@ namespace server.Services
         {
             return await _context.Deals
                 .Include(d => d.CreatedBy)
+                .Include(d => d.AssignedTo)
                 .FirstOrDefaultAsync(d => d.Id == key.Id);
         }
+
+        public async Task<AuthResponse?> CreateDealAsync(Deal request)
+        {
+           
+            await _context.Deals.AddAsync(request);
+            await _context.SaveChangesAsync();
+            return new AuthResponse("Deal created");
+        }
+
+        public record class AuthResponse(string? Message = null);
     }
 }

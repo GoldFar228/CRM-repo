@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using server.Models;
 using server.Services;
+using System.Security.Claims;
 
 namespace server.Controllers
 {
@@ -13,6 +14,7 @@ namespace server.Controllers
     {
         private readonly ILogger<ClientController> _logger;
         private readonly ClientService _service;
+        private readonly CRMDbContext _context;
 
         public ClientController(ILogger<ClientController> logger, ClientService service)
         {
@@ -38,8 +40,28 @@ namespace server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateClient([FromBody] Client client)
         {
-            var newClient = await _service.CreateClientAsync(client);
-            return Ok(newClient);
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userIdStr == null) return Unauthorized();
+
+            client.CreatedById = int.Parse(userIdStr);
+
+            await _service.CreateClientAsync(client);
+            return Ok(client);
         }
+
+        [Authorize]
+        [HttpGet("my")]
+        public async Task<IActionResult> GetMyClients()
+        {
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userIdStr == null) return Unauthorized();
+
+            var userId = int.Parse(userIdStr);
+
+            var clients = await _service.GetUserClientsAsync(userId);
+
+            return Ok(clients);
+        }
+
     }
 }

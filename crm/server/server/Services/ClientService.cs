@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using server.Models;
 using server.Models.Enums;
 using StackExchange.Redis;
+using System.Security.Claims;
 
 namespace server.Services
 {
@@ -52,14 +53,23 @@ namespace server.Services
                 Name = request.Name,
                 Email = request.Email,
                 Phone = request.Phone,
-                CreatedAt = request.CreatedAt,
+                CreatedAt = DateTime.UtcNow,
+                CreatedById = request.CreatedById,
             };
 
             await _context.Clients.AddAsync(client);
             await _context.SaveChangesAsync();
             return new AuthResponse("Client created");
         }
+        public async Task<List<Client>> GetUserClientsAsync(int id)
+        {
 
+            var clients = await _context.Clients
+                .Where(c => c.CreatedById == id)
+                .ToListAsync();
+
+            return clients;
+        }
         public record class AuthResponse(string? Message = null);
     }
 }
