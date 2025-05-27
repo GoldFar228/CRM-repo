@@ -2,7 +2,7 @@
 {
     public enum DealStatusEnum : byte
     {
-        New,
+        New = 1,
         InProgress,
         Completed
     }

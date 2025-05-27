@@ -49,7 +49,13 @@ export default defineConfig({
       path: '/login',
       component: './Authentication',
       layout: false
-    }
+    },
+    {
+      name: 'profile',
+      path: '/profile',
+      component: './Profile',
+      access: 'isUser'
+    },
   ],
   npmClient: 'npm',
 });

@@ -15,6 +15,7 @@ namespace server.Controllers
     {
         private readonly ILogger<DealController> _logger;
         private readonly DealService _service;
+        private int userId => int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
 
         public DealController(ILogger<DealController> logger,DealService service)
         {
@@ -34,13 +35,20 @@ namespace server.Controllers
         {
             var deal = await _service.GetDealByIdCachedAsync(id);
             return Ok(deal);
+        } 
+
+        [HttpGet]
+        public async Task<IActionResult> GetUserDeals()
+        {
+            var deal = await _service.GetUserDealsAsync(userId);
+            return Ok(deal);
         }
+
 
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateDeal([FromBody] CreateDealDto dto)
         {
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
 
             var deal = new Deal
             {
@@ -53,6 +61,24 @@ namespace server.Controllers
             };
 
             await _service.CreateDealAsync(deal);
+            return Ok(deal);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateDealStatus(int id, [FromBody] CreateDealDto dto)
+        {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+            var deal = new Deal
+            {
+                CreatedById = userId,
+                Status = dto.Status, 
+                Budget = dto.Budget, 
+                AssignedToId = dto.AssignedToId, 
+                Priority = dto.Priority
+               
+            };
+
+            await _service.UpdateDealAsync(id, deal, userId);
             return Ok(deal);
         }
     }

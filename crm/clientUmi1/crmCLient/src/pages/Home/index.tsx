@@ -3,35 +3,79 @@ import { trim } from '@/utils/format';
 import { PageContainer } from '@ant-design/pro-components';
 import { Access, request, useAccess, useModel } from '@umijs/max';
 import styles from './index.less';
-import { useState } from 'react';
-import { Role } from 'typings';
+import { useEffect, useState } from 'react';
+import { Deal, Role } from 'typings';
+import { StatusToString, PriorityToString } from '@/dataForExport';
+import { Button, Modal, Table, TableColumnsType, TableProps } from 'antd';
+
+
+const columns: TableColumnsType<Deal> = [
+  {
+    title: 'Создана в',
+    dataIndex: 'createdAt',
+    showSorterTooltip: { target: 'full-header' }
+  },
+  {
+    title: 'Кто создал',
+    dataIndex: ['createdBy', 'name'],
+    sorter: (a, b) => a.createdBy.name.localeCompare(b.createdBy.name),
+  },
+  {
+    title: 'Клиент',
+    dataIndex: ['assignedTo', 'name'],
+    sorter: (a, b) => a.createdBy.name.localeCompare(b.createdBy.name),
+  },
+  {
+    title: 'Статус',
+    render(val, rec, index) {
+      return StatusToString[rec.status]
+    }
+  },
+  {
+    title: 'Бюджет',
+    dataIndex: 'budget',
+  },
+  {
+    title: 'Приоритет',
+    render(val, rec, index) {
+      return PriorityToString[rec.priority]
+    }
+  },
+];
+
+
+const onChange: TableProps<Deal>['onChange'] = (pagination, filters, sorter, extra) => {
+  console.log('params', pagination, filters, sorter, extra);
+};
 
 const HomePage: React.FC = () => {
   const { name } = useModel('global');
 
-  const [data, setData] = useState<Array<{ id: number, name: string, phone: string, email: string, createdAt: Date, createdById: number }>>();
+  const [data, setData] = useState<Array<Deal>>();
   const { isUser } = useAccess();
-  const clickButton = () => {
-    request("/api/User/GetUsers",
-      { method: 'GET' }
-    )
-      .then((response) => {
-        console.log(response);
-        setData(response)
-      })
-  }
 
+  useEffect(() => {
+    const onGetDeals = async () => {
+      const res = await request('api/Deal/GetUserDeals', {
+        method: "GET"
+      });
+
+      await setData(res.filter((r: Deal) => r.status === 2));
+    };
+
+    onGetDeals();
+  }, [])
 
   return (
     <Access accessible={isUser}>
-      <PageContainer ghost>
-        <div className={styles.container}>
-          <input type="button" onClick={clickButton} />
-        </div>
-        <div className='container'>
-          {data?.map((d) => d.name + "\n" + d.phone) + "\n"}
-        </div>
-      </PageContainer>
+      <h1>Сделки в работе</h1>
+      <Table<Deal>
+        columns={columns}
+        dataSource={data}
+        onChange={onChange}
+        showSorterTooltip={{ target: 'sorter-icon' }}
+      />
+
     </Access>
 
   );

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Button, Modal, Table } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import { request, useModel } from '@umijs/max';
-import { Client } from 'typings';
-import ClientForm from '@/components/ClientForm';
-import ClientEditForm from '@/components/ClientEditForm';
+import { Client, Note } from 'typings';
+import ClientForm from '@/components/Client/ClientForm';
+import ClientEditForm from '@/components/Client/ClientEditForm';
 
 
 const columns: TableColumnsType<Client> = [
@@ -65,6 +65,7 @@ const Clients: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalEditOpen, setModalEditOpen] = useState(false);
   const [editingClient, setEditingClient] = useState<Client | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -74,9 +75,15 @@ const Clients: React.FC = () => {
   }, []);
 
   // Открыть модалку: если передали клиента — редактируем, иначе создаём
-  const openEditModal = (client?: Client) => {
+  const openEditModal = async (client?: Client) => {
+    var res = await request<Note[]>(`/api/Notes/GetNotesForClient?id=${client?.id}`, {
+                method: 'GET',
+            });
     setEditingClient(client || null);
     setModalEditOpen(true);
+
+    const note = res.length > 0 ? res[0].content : "";
+    setInfo(note);
   };
 
   return (
@@ -107,7 +114,7 @@ const Clients: React.FC = () => {
         open={modalEditOpen}
         onCancel={() => setModalEditOpen(false)}>
           
-        <ClientEditForm data={clients}/>
+        <ClientEditForm client={editingClient} initialContent={info}/>
       </Modal>
     </>
   )

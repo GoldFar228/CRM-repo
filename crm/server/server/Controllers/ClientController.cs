@@ -50,7 +50,7 @@ namespace server.Controllers
         }
 
         [Authorize]
-        [HttpGet("my")]
+        [HttpGet]
         public async Task<IActionResult> GetMyClients()
         {
             var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

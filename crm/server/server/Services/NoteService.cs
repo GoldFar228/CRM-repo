@@ -1,5 +1,6 @@
 ﻿using DotNetOpenAuth.OpenId.Extensions.UI;
 using Microsoft.EntityFrameworkCore;
+using server.DTOs;
 using server.Models;
 using StackExchange.Redis;
 
@@ -31,15 +32,32 @@ namespace server.Services
             return await _context.Notes
                 .FirstOrDefaultAsync(n => n.Id == key.Id);
         }
-
+        public async Task<List<Note>> GetNotesForClientAsync(int assignedToId)
+        {
+            return await _context.Notes
+                .Include(d => d.CreatedBy)
+                .Include(d => d.AssignedTo)
+                .Where(d => d.AssignedToId == assignedToId)
+                .ToListAsync();
+        }
         public async Task<Note?> GetNoteByIdCachedAsync(int id)
         {
             return await GetCachedAsync(new ReddisKey(id, Table), GetNoteByIdAsync);
         }
 
-        public async Task<AuthResponse> CreateNote(Note note)
+        public async Task<AuthResponse> CreateNoteAsync(Note note)
         {
             await _context.Notes.AddAsync(note);
+            await _context.SaveChangesAsync();
+            return new AuthResponse("Note created");
+        } 
+        public async Task<AuthResponse> UpdateNoteAsync(int id, Note dto, int userId)
+        {
+            var note = await _context.Notes.FindAsync(id);
+            if (note == null) return new AuthResponse("Note not found");
+
+            note.Content = dto.Content;
+            note.CreatedById = userId;
             await _context.SaveChangesAsync();
             return new AuthResponse("Note created");
         }

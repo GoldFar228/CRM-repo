@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using server.Models;
+using server.Models.Enums;
 using StackExchange.Redis;
 
 namespace server.Services
@@ -32,6 +33,17 @@ namespace server.Services
             var response = await query.OrderBy(x => x.Id).ToListAsync();
             return response;
         }
+        public async Task<List<Deal>> GetUserDealsAsync(int id)
+        {
+            var query = _context.Deals
+                .Include(d => d.CreatedBy)
+                .Include(d => d.AssignedTo)
+                .Where(d => d.CreatedById == id)
+                .AsQueryable();
+
+            var response = await query.OrderBy(x => x.Id).ToListAsync();
+            return response;
+        }
 
         private async Task<Deal?> GetDealByIdAsync(ReddisKey key)
         {
@@ -48,7 +60,16 @@ namespace server.Services
             await _context.SaveChangesAsync();
             return new AuthResponse("Deal created");
         }
+        public async Task<AuthResponse> UpdateDealAsync(int id, Deal dto, int userId)
+        {
+            var deal = await _context.Deals.FindAsync(id);
+            if (deal == null) return new AuthResponse("Deal not found");
 
+            deal.Status = dto.Status;
+            deal.CreatedById = userId;
+            await _context.SaveChangesAsync();
+            return new AuthResponse("Deal created");
+        }
         public record class AuthResponse(string? Message = null);
     }
 }

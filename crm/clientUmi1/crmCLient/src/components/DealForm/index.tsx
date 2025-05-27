@@ -30,7 +30,7 @@ const DealForm: React.FC = () => {
   const [clients, setClients] = useState<Client[]>([]);
 
   useEffect(() => {
-    request<Client[]>('/api/Client/GetMyClients/my', { method: 'GET' })
+    request<Client[]>('/api/Client/GetMyClients', { method: 'GET' })
       .then(setClients)
       .catch(() => message.error("Не удалось загрузить клиентов"));
   }, []);

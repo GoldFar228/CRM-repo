@@ -5,11 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server.DTOs
 {
-    public class CreateDealDto
+    public class CreateNoteDTO
     {
         public int AssignedToId { get; set; }
-        public DealStatusEnum Status { get; set; }
-        public decimal Budget { get; set; }
-        public DealPriorityEnum Priority { get; set; }
+        public string Content { get; set; }
+        public int CreatedById { get; set; }
     }
 }

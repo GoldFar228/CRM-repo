@@ -15,6 +15,7 @@
     "@ant-design/pro-components": "^2.4.4",
     "@umijs/max": "^4.4.10",
     "antd": "^5.4.0",
+    "jwt-decode": "^4.0.0",
     "react-router-dom": "^7.6.0",
     "react-toastify": "^11.0.5"
   },

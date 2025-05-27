@@ -40,6 +40,7 @@ export type Client = {
 }
 
 export type Deal = {
+    id: number;
     createdAt: Date;
     createdBy: User;
     status: 1 | 2 | 3;
@@ -49,6 +50,7 @@ export type Deal = {
 }
 
 export type Note = {
+    id: number;
     content: string;
     createdBy: User;
     assignedTo: Client;
