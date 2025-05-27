@@ -36,5 +36,13 @@ namespace server.Services
         {
             return await GetCachedAsync(new ReddisKey(id, Table), GetNoteByIdAsync);
         }
+
+        public async Task<AuthResponse> CreateNote(Note note)
+        {
+            await _context.Notes.AddAsync(note);
+            await _context.SaveChangesAsync();
+            return new AuthResponse("Note created");
+        }
+        public record class AuthResponse(string? Message = null);
     }
 }

@@ -2,6 +2,7 @@ using DotNetOpenAuth.OpenId.Extensions.UI;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using server.DTOs;
 using server.Models;
 using server.Services;
 using System.Security.Claims;
@@ -37,22 +38,22 @@ namespace server.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateDeal([FromBody] Deal deal)
+        public async Task<IActionResult> CreateDeal([FromBody] CreateDealDto dto)
         {
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
 
-            var newDeal = new Deal
+            var deal = new Deal
             {
-                CreatedById = userId,
                 CreatedAt = DateTime.UtcNow,
-                AssignedToId = deal.AssignedToId,
-                Status = deal.Status,
-                Budget = deal.Budget,
-                Priority = deal.Priority
+                CreatedById = userId,
+                AssignedToId = dto.AssignedToId,
+                Status = dto.Status,
+                Budget = dto.Budget,
+                Priority = dto.Priority
             };
 
-            await _service.CreateDealAsync(newDeal);
-            return Ok(newDeal);
+            await _service.CreateDealAsync(deal);
+            return Ok(deal);
         }
     }
 }

@@ -47,3 +47,9 @@ export type Deal = {
     priority: 1 | 2 | 3;
     assignedTo: Client;
 }
+
+export type Note = {
+    content: string;
+    createdBy: User;
+    assignedTo: Client;
+}

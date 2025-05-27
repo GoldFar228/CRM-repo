@@ -1,7 +1,6 @@
-import { history, request, useModel } from "@umijs/max";
+import { request } from "@umijs/max";
 import type { FormProps } from 'antd';
 import { Button, DatePicker, Form, Input, message } from 'antd';
-import { useState } from "react";
 import { Client } from "typings";
 
 const ClientForm: React.FC = () => {

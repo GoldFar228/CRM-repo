@@ -4,6 +4,7 @@ import type { TableColumnsType, TableProps } from 'antd';
 import { request, useModel } from '@umijs/max';
 import { Client } from 'typings';
 import ClientForm from '@/components/ClientForm';
+import ClientEditForm from '@/components/ClientEditForm';
 
 
 const columns: TableColumnsType<Client> = [
@@ -21,8 +22,6 @@ const columns: TableColumnsType<Client> = [
         value: 'Лиза',
       }
     ],
-    // specify the condition of filtering result
-    // here is that finding the name started with `value`
     onFilter: (value, record) => record.name.indexOf(value as string) === 0,
     sorter: (a, b) => a.name.localeCompare(b.name),
     defaultSortOrder: 'ascend'
@@ -62,38 +61,53 @@ const onChange: TableProps<Client>['onChange'] = (pagination, filters, sorter, e
 
 
 const Clients: React.FC = () => {
-
-  const [clients, setClients] = useState();
-  const [modalOpen, setmodalOpen] = useState(false);
+  const [clients, setClients] = useState<Client[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalEditOpen, setModalEditOpen] = useState(false);
+  const [editingClient, setEditingClient] = useState<Client | null>(null);
 
   useEffect(() => {
-    const onGetClients = async () => {
-      const res = await request('api/Client/GetClients', {
-        method: "GET"
-      });
-      await setClients(res);
-    };
-
-    onGetClients();
+    (async () => {
+      const res = await request<Client[]>('/api/Client/GetClients', { method: 'GET' });
+      setClients(res);
+    })();
   }, []);
+
+  // Открыть модалку: если передали клиента — редактируем, иначе создаём
+  const openEditModal = (client?: Client) => {
+    setEditingClient(client || null);
+    setModalEditOpen(true);
+  };
 
   return (
     <>
       <Table<Client>
         columns={columns}
         dataSource={clients}
+        rowKey="id"
         onChange={onChange}
         showSorterTooltip={{ target: 'sorter-icon' }}
+        onRow={record => ({
+          onClick: () => openEditModal(record),
+        })}
       />
-      <Button type="primary" htmlType="submit" onClick= {() => setmodalOpen(true)}>Зарегестрировать клиента</Button>
+      <Button type="primary" htmlType="submit" onClick={() => setModalOpen(true)}>Зарегестрировать клиента</Button>
       <Modal
         title="Зарегестрируйте клиента"
         centered
         open={modalOpen}
-        onOk={() => setmodalOpen(false)}
-        onCancel={() => setmodalOpen(false)}
+        onCancel={() => setModalOpen(false)}
+        footer={null}
       >
         <ClientForm />
+      </Modal>
+      <Modal
+        title="Добавить инфу о клиенте"
+        centered
+        open={modalEditOpen}
+        onCancel={() => setModalEditOpen(false)}>
+          
+        <ClientEditForm data={clients}/>
       </Modal>
     </>
   )
