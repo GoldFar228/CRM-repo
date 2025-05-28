@@ -14,7 +14,6 @@ namespace server.Controllers
     {
         private readonly ILogger<ClientController> _logger;
         private readonly ClientService _service;
-        private readonly CRMDbContext _context;
 
         public ClientController(ILogger<ClientController> logger, ClientService service)
         {
@@ -63,5 +62,13 @@ namespace server.Controllers
             return Ok(clients);
         }
 
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteClient(int id)
+        {
+            await _service.DeleteClientAsync(id);
+
+            return Ok(new { message = "Клиент успешно удалён." });
+        }
     }
 }

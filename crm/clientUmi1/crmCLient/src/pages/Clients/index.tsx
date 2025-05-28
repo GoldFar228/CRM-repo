@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Table } from 'antd';
+import { Button, Modal, Modal as AntModal, Table, message } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import { request, useModel } from '@umijs/max';
 import { Client, Note } from 'typings';
 import ClientForm from '@/components/Client/ClientForm';
 import ClientEditForm from '@/components/Client/ClientEditForm';
+import dayjs from 'dayjs';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 
 const columns: TableColumnsType<Client> = [
@@ -34,6 +36,7 @@ const columns: TableColumnsType<Client> = [
   {
     title: 'Зарегестрирован в',
     dataIndex: 'createdAt',
+    render: (value: string) => dayjs(value).format('DD.MM.YYYY HH:mm'),
   },
   {
     title: 'Кто зарегестрировал',
@@ -76,15 +79,46 @@ const Clients: React.FC = () => {
 
   // Открыть модалку: если передали клиента — редактируем, иначе создаём
   const openEditModal = async (client?: Client) => {
-    var res = await request<Note[]>(`/api/Notes/GetNotesForClient?id=${client?.id}`, {
-                method: 'GET',
-            });
+    const res = await request<Note[]>(`/api/Notes/GetNotesForClient?id=${client?.id}`, {
+      method: 'GET',
+    });
     setEditingClient(client || null);
     setModalEditOpen(true);
 
     const note = res.length > 0 ? res[0].content : "";
     setInfo(note);
   };
+
+  const onDeleteClick = async (client?: Client) => {
+    if (!client) return;
+    AntModal.confirm({
+      title: 'Удалить клиента?',
+      icon: <ExclamationCircleOutlined />,
+      content: `Вы уверены, что хотите удалить клиента ${client.name}?`,
+      okText: 'Удалить',
+      okType: 'danger',
+      cancelText: 'Отмена',
+      onOk: async () => {
+        try {
+          await request(`/api/Client/DeleteClient/${client.id}`, {
+            method: 'DELETE',
+          });
+
+          message.success('Клиент удалён');
+
+          // Обновляем список клиентов
+          const res = await request<Client[]>('/api/Client/GetClients', { method: 'GET' });
+          setClients(res);
+
+          // Закрыть модалку
+          setModalEditOpen(false);
+        } catch (error) {
+          message.error('Ошибка при удалении клиента');
+          console.error(error);
+        }
+      },
+    });
+  }
 
   return (
     <>
@@ -112,9 +146,14 @@ const Clients: React.FC = () => {
         title="Добавить инфу о клиенте"
         centered
         open={modalEditOpen}
-        onCancel={() => setModalEditOpen(false)}>
-          
-        <ClientEditForm client={editingClient} initialContent={info}/>
+        onCancel={() => setModalEditOpen(false)}
+        footer={[
+          <Button key="remove" color='danger' variant='dashed' onClick={() => onDeleteClick(editingClient!)}>
+            Удалить клиента
+          </Button>
+        ]}>
+
+        <ClientEditForm client={editingClient} initialContent={info} />
       </Modal>
     </>
   )

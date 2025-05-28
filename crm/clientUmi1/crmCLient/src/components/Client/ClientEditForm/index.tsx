@@ -1,6 +1,6 @@
 import { request } from "@umijs/max";
 import type { FormProps } from 'antd';
-import { Button, DatePicker, Form, Input, message } from 'antd';
+import { Button, DatePicker, Form, Input, message, Space } from 'antd';
 import { Client, Note } from "../../../../typings";
 import { useEffect, useState } from "react";
 
@@ -25,7 +25,7 @@ const ClientEditForm: React.FC<Props> = ({ client, initialContent }) => {
             form.resetFields();
         }
     }, [initialContent, client]); // обновляется при смене клиента или текста
-    
+
     const onCreateOrUpdateNote = async (data: CreateNoteForm) => {
         if (!client) return;
 
@@ -70,7 +70,7 @@ const ClientEditForm: React.FC<Props> = ({ client, initialContent }) => {
         await onCreateOrUpdateNote(data);
     };
 
-    
+
 
     return (
         <Form
@@ -91,7 +91,8 @@ const ClientEditForm: React.FC<Props> = ({ client, initialContent }) => {
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit" disabled={!client}>
+
+                <Button type="primary" htmlType="submit" disabled={!client} >
                     {client ? 'Добавить/Обновить запись' : 'Выберите клиента'}
                 </Button>
             </Form.Item>

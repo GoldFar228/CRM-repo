@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using server.DTOs;
 using server.Models;
+using server.Models.Enums;
 using server.Services;
 using System.Security.Claims;
 
@@ -65,20 +66,10 @@ namespace server.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDealStatus(int id, [FromBody] CreateDealDto dto)
+        public async Task<IActionResult> UpdateDealStatus(int id, [FromBody] DealStatusEnum status)
         {
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
-            var deal = new Deal
-            {
-                CreatedById = userId,
-                Status = dto.Status, 
-                Budget = dto.Budget, 
-                AssignedToId = dto.AssignedToId, 
-                Priority = dto.Priority
-               
-            };
 
-            await _service.UpdateDealAsync(id, deal, userId);
+            var deal = await _service.UpdateDealAsync(id, status);
             return Ok(deal);
         }
     }

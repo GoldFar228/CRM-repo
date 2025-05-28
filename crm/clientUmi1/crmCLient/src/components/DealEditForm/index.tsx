@@ -1,9 +1,9 @@
+import { StatusMap } from "@/dataForExport";
 import { request } from "@umijs/max";
 import type { FormProps } from 'antd';
 import { Button, Form, message, Select } from 'antd';
 import { useEffect, useState } from "react";
 import { Deal } from "typings";
-import { StatusMap } from "../DealForm";
 
 const { Option } = Select
 
@@ -18,7 +18,6 @@ interface CreateDealForm {
 
 const DealEditForm: React.FC<Props> = ({ deal, initialContent }) => {
     const [form] = Form.useForm<CreateDealForm>();
-    const [info, setInfo] = useState("");
 
     useEffect(() => {
         if (initialContent) {
@@ -31,18 +30,13 @@ const DealEditForm: React.FC<Props> = ({ deal, initialContent }) => {
     const onUpdateDeal = async (status: number) => {
         if (!deal) return;
 
-        // Получаем все заметки для клиента
-
-
-        await request(`/api/Notes/UpdateNote/${deal.id}`, {
+        await request(`/api/Deal/UpdateDealStatus/${deal.id}`, {
             method: 'PUT',
             requestType: 'json',
             headers: {
                 'Content-Type': 'application/json',
             },
-            data: {
-                status: deal.status
-            }
+            data: status
         });
         message.success('Запись обновлена');
 

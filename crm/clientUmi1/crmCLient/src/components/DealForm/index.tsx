@@ -1,22 +1,12 @@
+import { PriorityMap, StatusMap } from "@/dataForExport";
 import { request } from "@umijs/max";
 import type { FormProps } from 'antd';
 import { Button, Form, Input, message, Select } from 'antd';
 import { useEffect, useState } from "react";
 import { Client } from "typings";
 
+
 const { Option } = Select;
-
-export const StatusMap = {
-  1: "Новая",
-  2: "В работе",
-  3: "Закрыта",
-} as const;
-
-export const PriorityMap = {
-  1: "Низкий",
-  2: "Средний",
-  3: "Высокий",
-} as const;
 
 interface CreateDealForm {
   budget: number;

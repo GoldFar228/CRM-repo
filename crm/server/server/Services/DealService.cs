@@ -60,13 +60,12 @@ namespace server.Services
             await _context.SaveChangesAsync();
             return new AuthResponse("Deal created");
         }
-        public async Task<AuthResponse> UpdateDealAsync(int id, Deal dto, int userId)
+        public async Task<AuthResponse> UpdateDealAsync(int id, DealStatusEnum status)
         {
             var deal = await _context.Deals.FindAsync(id);
             if (deal == null) return new AuthResponse("Deal not found");
 
-            deal.Status = dto.Status;
-            deal.CreatedById = userId;
+            deal.Status = status;
             await _context.SaveChangesAsync();
             return new AuthResponse("Deal created");
         }

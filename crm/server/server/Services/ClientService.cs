@@ -70,6 +70,19 @@ namespace server.Services
 
             return clients;
         }
+        public async Task<AuthResponse> DeleteClientAsync(int id)
+        {
+
+            var client = await _context.Clients.FindAsync(id);
+            if (client == null)
+            {
+                return new AuthResponse("Client is not found");
+            }
+
+            _context.Clients.Remove(client);
+            await _context.SaveChangesAsync();
+            return new AuthResponse("Client deleted") ;
+        }
         public record class AuthResponse(string? Message = null);
     }
 }
